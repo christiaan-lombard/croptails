@@ -1,0 +1,38 @@
+extends NodeState
+
+@export var player: Player
+@export var animated_sprite_2d: AnimatedSprite2D
+
+func _on_process(_delta : float) -> void:
+	pass
+
+func _on_physics_process(_delta : float) -> void:
+	match player.direction:
+		Vector2.UP:
+			animated_sprite_2d.play("idle_back")
+		Vector2.DOWN:
+			animated_sprite_2d.play("idle_front")
+		Vector2.LEFT:
+			animated_sprite_2d.play("idle_left")
+		Vector2.RIGHT:
+			animated_sprite_2d.play("idle_right")
+		_:
+			animated_sprite_2d.play("idle_front")
+
+func _on_next_transitions() -> void:
+	if GameInputEvents.is_movement_input():
+		transition.emit("Walk")
+	elif player.tool == DataTypes.Tools.Axe && GameInputEvents.is_hit():
+		transition.emit("Chop")	
+	elif player.tool == DataTypes.Tools.Hoe && GameInputEvents.is_hit():
+		transition.emit("Till")	
+	elif player.tool == DataTypes.Tools.Water && GameInputEvents.is_hit():
+		transition.emit("Water")
+
+
+func _on_enter() -> void:
+	pass
+
+
+func _on_exit() -> void:
+	animated_sprite_2d.stop()

@@ -1,0 +1,20 @@
+class_name GameInputEvents
+
+
+static func movement_input() -> Vector2:
+	if Input.is_action_pressed("walk_left"):
+		return Vector2.LEFT
+	elif Input.is_action_pressed("walk_right"):
+		return Vector2.RIGHT
+	elif Input.is_action_pressed("walk_up"):
+		return Vector2.UP
+	elif Input.is_action_pressed("walk_down"):
+		return Vector2.DOWN
+	else:
+		return Vector2.ZERO
+
+static func is_movement_input() -> bool:
+	return movement_input() != Vector2.ZERO
+
+static func is_hit() -> bool:
+	return Input.is_action_just_pressed("hit")
