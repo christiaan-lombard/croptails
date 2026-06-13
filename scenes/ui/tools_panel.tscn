@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://icj1aql0pt0v"]
+
+[ext_resource type="Theme" uid="uid://ljcck66th0xd" path="res://scenes/ui/game_ui_theme.tres" id="1_2yiqu"]
+[ext_resource type="Script" uid="uid://bavj5u6p51m5y" path="res://scenes/ui/tools_panel.gd" id="2_0jxvs"]
+[ext_resource type="Texture2D" uid="uid://rw3oiqpxnc6j" path="res://assets/objects/basic_tools_and_meterials.png" id="2_xkgdf"]
+[ext_resource type="Texture2D" uid="uid://b38vxe7fhgbd4" path="res://assets/objects/basic_plants.png" id="3_a7ivs"]
+[ext_resource type="ButtonGroup" uid="uid://6ubehfeq13km" path="res://scenes/ui/tools_button_group.tres" id="3_gbtgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7ivs"]
+atlas = ExtResource("2_xkgdf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkgdf"]
+atlas = ExtResource("2_xkgdf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xkgdf"]
+load_path = "res://.godot/imported/basic_tools_and_meterials.png-2f6b5f2aa48ae7bae2c454c7806216e6.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jxvs"]
+atlas = SubResource("CompressedTexture2D_xkgdf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbtgy"]
+atlas = ExtResource("3_a7ivs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6726"]
+atlas = SubResource("AtlasTexture_gbtgy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a7ivs"]
+load_path = "res://.godot/imported/basic_plants.png-e17f13c232bdc5bdaf3cbdad5cff4d17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3neg6"]
+atlas = SubResource("CompressedTexture2D_a7ivs")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur6ba"]
+atlas = SubResource("AtlasTexture_3neg6")
+region = Rect2(0, 0, 16, 16)
+
+[node name="ToolsPanel" type="PanelContainer" unique_id=1044776872]
+offset_right = 26.0
+offset_bottom = 26.0
+theme = ExtResource("1_2yiqu")
+theme_type_variation = &"DarkWoodPanel"
+script = ExtResource("2_0jxvs")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=389925351]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1909956402]
+layout_mode = 2
+
+[node name="ToolAxe" type="Button" parent="MarginContainer/HBoxContainer" unique_id=2119785037]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+toggle_mode = true
+button_group = ExtResource("3_gbtgy")
+icon = SubResource("AtlasTexture_a7ivs")
+icon_alignment = 1
+
+[node name="ToolHoe" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1282362737]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+toggle_mode = true
+button_group = ExtResource("3_gbtgy")
+icon = SubResource("AtlasTexture_xkgdf")
+icon_alignment = 1
+
+[node name="ToolWater" type="Button" parent="MarginContainer/HBoxContainer" unique_id=830564412]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+toggle_mode = true
+button_group = ExtResource("3_gbtgy")
+icon = SubResource("AtlasTexture_0jxvs")
+icon_alignment = 1
+
+[node name="ToolCorn" type="Button" parent="MarginContainer/HBoxContainer" unique_id=2007984534]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+toggle_mode = true
+button_group = ExtResource("3_gbtgy")
+icon = SubResource("AtlasTexture_a6726")
+icon_alignment = 1
+
+[node name="ToolTomato" type="Button" parent="MarginContainer/HBoxContainer" unique_id=388578105]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+toggle_mode = true
+button_group = ExtResource("3_gbtgy")
+icon = SubResource("AtlasTexture_ur6ba")
+icon_alignment = 1

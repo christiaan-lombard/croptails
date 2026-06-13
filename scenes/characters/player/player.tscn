@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dyi88iy150rp8" path="res://assets/characters/basic_charakter_spritesheet.png" id="1_t61fv"]
 [ext_resource type="Texture2D" uid="uid://c4t0xhb4usw4r" path="res://assets/characters/basic_charakter_actions.png" id="2_686vu"]
 [ext_resource type="Script" uid="uid://cvlgetbrgoyg1" path="res://scripts/state_machine/node_state_machine.gd" id="3_686vu"]
+[ext_resource type="PackedScene" uid="uid://colg44otebqsu" path="res://scenes/components/hit_component.tscn" id="4_3xnwo"]
 [ext_resource type="Script" uid="uid://b8gcx3ja8sh4n" path="res://scenes/characters/player/idle_state.gd" id="4_hss88"]
 [ext_resource type="Script" uid="uid://dbfm1no6crbvg" path="res://scenes/characters/player/walk_state.gd" id="5_qd3e3"]
 [ext_resource type="Script" uid="uid://nn7p8ucf4d4g" path="res://scenes/characters/player/chop_state.gd" id="7_mk55u"]
@@ -355,7 +356,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2v4cy")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_back",
 "speed": 3.0
 }, {
@@ -366,7 +367,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b4gk5")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_front",
 "speed": 3.0
 }, {
@@ -377,7 +378,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gpigg")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_left",
 "speed": 3.0
 }, {
@@ -388,13 +389,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_10pim")
 }],
-"loop": true,
+"loop": false,
 "name": &"watering_right",
 "speed": 3.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t61fv"]
 radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_djydg"]
+radius = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=209239896]
 collision_layer = 2
@@ -403,12 +407,19 @@ script = ExtResource("1_6avc5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1797157647]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_8y75b")
-animation = &"tilling_right"
+animation = &"chopping_right"
 autoplay = "idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=919867119]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_t61fv")
+
+[node name="HitComponent" parent="." unique_id=2025335544 instance=ExtResource("4_3xnwo")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitComponent" unique_id=976269902]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_djydg")
+debug_color = Color(0.63924146, 0.054224446, 0.11391511, 0.41960785)
 
 [node name="StateMachine" type="Node" parent="." unique_id=1188978408 node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("3_686vu")
@@ -424,15 +435,18 @@ script = ExtResource("5_qd3e3")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
-[node name="Chop" type="Node" parent="StateMachine" unique_id=530753153 node_paths=PackedStringArray("player", "animated_sprite_2d")]
+[node name="Chop" type="Node" parent="StateMachine" unique_id=530753153 node_paths=PackedStringArray("player", "animated_sprite_2d", "hit_component_collision_shape")]
 script = ExtResource("7_mk55u")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+hit_component_collision_shape = NodePath("../../HitComponent/CollisionShape2D")
 
 [node name="Till" type="Node" parent="StateMachine" unique_id=719637949 node_paths=PackedStringArray("player", "animated_sprite_2d")]
 script = ExtResource("8_xuses")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
-[node name="Water" type="Node" parent="StateMachine" unique_id=257465747]
+[node name="Water" type="Node" parent="StateMachine" unique_id=257465747 node_paths=PackedStringArray("player", "animated_sprite_2d")]
 script = ExtResource("9_42irl")
+player = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")

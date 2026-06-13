@@ -16,6 +16,7 @@ func _ready() -> void:
 	if initial_node_state:
 		initial_node_state._on_enter()
 		current_node_state = initial_node_state
+		current_node_state_name = current_node_state.name.to_lower()
 
 
 func _process(delta : float) -> void:
@@ -36,6 +37,7 @@ func transition_to(node_state_name : String) -> void:
 	var new_node_state = node_states.get(node_state_name.to_lower())
 	
 	if !new_node_state:
+		push_warning("Node state '", node_state_name, "' not defined")
 		return
 	
 	if current_node_state:

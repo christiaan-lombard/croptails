@@ -16,5 +16,5 @@ static func movement_input() -> Vector2:
 static func is_movement_input() -> bool:
 	return movement_input() != Vector2.ZERO
 
-static func is_hit() -> bool:
-	return Input.is_action_just_pressed("hit")
+static func is_interact() -> bool:
+	return Input.is_action_just_pressed("interact")

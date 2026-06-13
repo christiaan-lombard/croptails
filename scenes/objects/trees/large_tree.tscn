@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ceg0vexucsn13"]
+
+[ext_resource type="Shader" uid="uid://bs0nj1oyehxji" path="res://scenes/objects/trees/tree_shake.gdshader" id="1_f4wgc"]
+[ext_resource type="Texture2D" uid="uid://ooxhg638aa2h" path="res://assets/objects/basic_grass_biom_things.png" id="1_wjqkr"]
+[ext_resource type="Script" uid="uid://ddl1dxq2ka5wy" path="res://scenes/objects/trees/small_tree.gd" id="2_f4wgc"]
+[ext_resource type="PackedScene" uid="uid://csdxbnarg0twl" path="res://scenes/components/damage_component.tscn" id="3_6vpey"]
+[ext_resource type="PackedScene" uid="uid://iw6ss4ln5i0p" path="res://scenes/components/hurt_component.tscn" id="4_0ia52"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6vpey"]
+resource_local_to_scene = true
+shader = ExtResource("1_f4wgc")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 10.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xwdn"]
+atlas = ExtResource("1_wjqkr")
+region = Rect2(16, 0, 32, 32)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_au4vd"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a8qts"]
+radius = 4.1231055
+
+[node name="LargeTree" type="Sprite2D" unique_id=21692624]
+material = SubResource("ShaderMaterial_6vpey")
+position = Vector2(0, -10)
+texture = SubResource("AtlasTexture_6xwdn")
+script = ExtResource("2_f4wgc")
+
+[node name="DamageComponent" parent="." unique_id=1506478301 instance=ExtResource("3_6vpey")]
+max_damage = 5
+
+[node name="HurtComponent" parent="." unique_id=1858601884 instance=ExtResource("4_0ia52")]
+tool = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=1695314625]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_au4vd")
+debug_color = Color(0.7967164, 0.42138872, 0.12490418, 0.41960785)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=973785820]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1653729432]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_a8qts")

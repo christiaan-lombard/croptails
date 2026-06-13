@@ -22,12 +22,15 @@ func _on_physics_process(_delta : float) -> void:
 func _on_next_transitions() -> void:
 	if GameInputEvents.is_movement_input():
 		transition.emit("Walk")
-	elif player.tool == DataTypes.Tools.Axe && GameInputEvents.is_hit():
-		transition.emit("Chop")	
-	elif player.tool == DataTypes.Tools.Hoe && GameInputEvents.is_hit():
-		transition.emit("Till")	
-	elif player.tool == DataTypes.Tools.Water && GameInputEvents.is_hit():
-		transition.emit("Water")
+	elif GameInputEvents.is_interact():
+		match player.tool:
+			DataTypes.Tools.Axe:
+				transition.emit("Chop")	
+			DataTypes.Tools.Hoe:
+				transition.emit("Till")	
+			DataTypes.Tools.Water:
+				transition.emit("Water")
+
 
 
 func _on_enter() -> void:

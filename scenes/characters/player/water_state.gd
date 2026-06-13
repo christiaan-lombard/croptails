@@ -29,4 +29,4 @@ func _on_enter() -> void:
 
 
 func _on_exit() -> void:
-	animated_sprite_2d.stop()
+	pass
